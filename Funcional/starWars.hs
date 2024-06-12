@@ -2,6 +2,7 @@ import Text.Show.Functions
 import Data.List(genericLength)
 
 --                              STAR WARS
+--https://docs.google.com/document/d/1rbOy1rIFmBxMRhTOWvI-u097l9KatHRbqt5KBXvVSfI/edit
 
 -- Datos Principales
 

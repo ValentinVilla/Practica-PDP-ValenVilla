@@ -2,6 +2,7 @@ import Text.Show.Functions
 import Data.List(genericLength)
 
 --                              LA GRANJA
+--https://docs.google.com/document/d/1fYZ6Zy7oaorLEv5XqIa8ktnmVlxkp9bpicXhORgm9m8/edit#heading=h.gcspwnupgahw
 
 -- Datos Principales
 

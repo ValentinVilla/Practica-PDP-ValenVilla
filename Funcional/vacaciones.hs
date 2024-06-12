@@ -2,7 +2,7 @@ import Text.Show.Functions
 import Data.List(genericLength)
 
 --                              VACACIONES
-
+--https://docs.google.com/document/d/1C_oehBaJYavsacmThRZcrpIpX6axxVOdX19vYusRhlE/edit#heading=h.jqehittq4m6
 
 --1)--------------------------------------------------------------------------------------------------------------------
 data Turista = Turista{
