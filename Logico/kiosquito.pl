@@ -97,7 +97,7 @@ vendedorSuertudo(Kiosquero):-
     forall(ventas(Kiosquero, _, [Venta|_]), ventaImportante(Venta)).
  
 unKiosquero(Kiosquero):-
-    kiosquero(Kiosquero, _, _, _).
+    ventas(Kiosquero, _, _).
 
 ventaImportante(golosinas(Precio)):-
     Precio > 100.
