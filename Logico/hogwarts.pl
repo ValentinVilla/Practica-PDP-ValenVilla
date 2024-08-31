@@ -38,6 +38,7 @@ permiteEntrar(Mago, Casa):-
     Casa \= slytherin.
 
 % 2)
+
 caracteristicaCasa(slytherin, orgullo).
 caracteristicaCasa(slytherin, inteligencia).
 
@@ -47,6 +48,7 @@ caracteristicaCasa(ravenclaw, inteligencia).
 caracteristicaCasa(ravenclaw, responsabilidad).
 
 caracteristicaCasa(hufflepuff, amistad).
+
 
 caracterApropiado(Mago, Casa):-
     mago(Mago,_,Caracteristicas),
@@ -106,6 +108,7 @@ accion(hermione, fueALaBiblioteca, mala(10)).
 accion(hermione, salvarAmigos, buena(50)).
 
 accion(draco, fueALaMazmorra).
+%accion(draco, salvarAmigos, buena(50)).
 
 accion(ron, ganoAjedrez, buena(50)).
 
@@ -138,38 +141,57 @@ noSonMalas(Accion):-
 
 % 2)
 
+accionRecurrente(Accion):-
+    accion(Mago1, Accion, _),
+    accion(Mago2, Accion, _),
+    Mago1 \= Mago2.
 
+accionRecurrente(Accion):-
+    accion(Mago1, Accion),
+    accion(Mago2, Accion),
+    Mago1 \= Mago2.
 
+% 3)
 
+puntajeTotal(Casa, Puntaje):-
+    unaCasa(Casa),
+    findall(Punto, puntajeDeCasa(Casa, Punto), PuntosTotales),
+    sumlist(PuntosTotales, Puntaje).
 
+puntajeDeCasa(Casa, Punto):-
+    esDe(Mago, Casa),
+    puntosMago(Mago, Punto).
 
+puntosMago(Mago, Punto):-
+    accion(Mago, _, buena(Punto)).
 
+puntosMago(Mago, Punto):-
+    accion(Mago, _, mala(PuntoMalos)),
+    Punto is PuntoMalos * -1.
 
+% 4) 
 
+casaGanadora(Casa):-
+    unaCasa(Casa),
+    puntajeTotal(Casa, Puntaje),
+    forall((unaCasa(OtraCasa), puntajeTotal(OtraCasa, PuntajeOtraCasa)) , Puntaje >= PuntajeOtraCasa ).
 
+% 5)
 
+% - respondePregunta(Mago, PreguntaRespondida, Dificultad, ProfesorQueLaHace).
+respondePregunta(hermione, dondeSeEncuentraUnBezoar, 20, profeSnape).
+respondePregunta(hermione, comoLevitarPluma, 25, profeFlitwick).
 
+puntosMago(Mago, Punto):-
+    respondePregunta(Mago, _,Punto,_). % debido a que Puntos son lo mismo q la dificultad.
 
+puntosMago(Mago, Punto):-
+    respondePregunta(Mago, _,Dificultad, profeSnape),
+    Punto is (Dificultad/2).
 
+% Modifico puntosMago ya que con esta funcioin, valga la redundancia consigo los puntos de los magos,
+% utilizada para saber los puntos de cada casa entonces agregando estos predicados ya adapto el codigo para 
+% agregar los untos de las preguntas.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
