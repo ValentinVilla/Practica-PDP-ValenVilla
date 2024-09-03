@@ -115,29 +115,31 @@ apuesta(imperfecta(Caballo1, Caballo2)).
 % - apuestaGanadora(Apuesta, Resultado).        
 %  Resultado es una lista de caballos donde el primero es el gandor el segundo el segundo y asi ...
 
-apuestaGanadora(ganadorPorUnCaballo(Caballo), Resultado):-
-    caballoSaleEnPosicion(1, Caballo, Resultado).
+apuestaGanadora(ganadorPorUnCaballo(Caballo), Resultado) :-
+  caballoSalePrimero(Caballo, Resultado).
 
-apuestaGanadora(segundoPorUnCaballo(Caballo), Resultado):-
-    caballoSaleEnPosicion(1, Caballo, Resultado).
-apuestaGanadora(segundoPorUnCaballo(Caballo), Resultado):-
-    caballoSaleEnPosicion(2, Caballo, Resultado).
+apuestaGanadora(segundoPorUnCaballo(Caballo), Resultado) :-
+  caballoSalePrimeroOSegundo(Caballo, Resultado).
 
-apuestaGanadora(exacta(Caballo1, Caballo2), Resultado):-
-    caballoSaleEnPosicion(1, Caballo1, Resultado),
-    caballoSaleEnPosicion(2, Caballo2, Resultado).
+apuestaGanadora(exacta(Caballo1, Caballo2), Resultado) :-
+  caballoSalePrimero(Caballo1, Resultado),
+  caballoSaleSegundo(Caballo2, Resultado).
 
-apuestaGanadora(imperfecta(Caballo1, Caballo2), Resultado):-
-    caballoSaleEnPosicion(1, Caballo1, Resultado),
-    caballoSaleEnPosicion(2, Caballo2, Resultado).
+apuestaGanadora(imperfecta(Caballo1, Caballo2), Resultado) :-
+  caballoSalePrimeroOSegundo(Caballo1, Resultado),
+  caballoSalePrimeroOSegundo(Caballo2, Resultado).
 
-apuestaGanadora(imperfecta(Caballo1, Caballo2), Resultado):-
-    caballoSaleEnPosicion(2, Caballo2, Resultado),
-    caballoSaleEnPosicion(1, Caballo1, Resultado).
+caballoSalePrimero(Caballo, Resultado):-
+    nth1(1,Resultado,Caballo).
 
-caballoSaleEnPosicion(Posicion, Caballo, Resultado):-
-    nth1(Posicion,Resultado,Caballo).
+caballoSaleSegundo(Caballo, Resultado):-
+    nth1(2,Resultado,Caballo).
 
+caballoSalePrimeroOSegundo(Caballo, Resultado):-
+    caballoSalePrimero(Caballo, Resultado).
+
+caballoSalePrimeroOSegundo(Caballo, Resultado):-
+    caballoSaleSegundo(Caballo, Resultado).
 %%%%%%%%%%%%%%%%%%%%%%
 %%%%%% PUNTO 6 %%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%
