@@ -1,3 +1,5 @@
+// Enunciado del parcial HSS (calculo que funcionara el link este) : https://www.utnianos.com.ar/foro/attachment.php?aid=24704
+
 class Panelista{
     var puntosEstrella
     const tipoPanelista
